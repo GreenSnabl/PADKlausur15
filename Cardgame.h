@@ -7,7 +7,7 @@
 #include <sstream>
 #include <algorithm>
 
-enum class Suit{Karo, Herz, Pik, Kreuz};
+enum class Suit{KARO, HERZ, PIK, KREUZ};
 enum class Face{SIEBEN, ACHT, NEUN, ZEHN, BUBE, DAME, KOENIG, ASS};
 
 

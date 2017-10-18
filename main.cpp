@@ -4,7 +4,7 @@
 
 int main() {
     
-    Card a(Suit::Karo, Face::SIEBEN);
+    Card a(Suit::KARO, Face::SIEBEN);
     
     std::cout << a.toString();
     

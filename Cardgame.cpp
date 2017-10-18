@@ -4,10 +4,10 @@ std::string Card::toString()
 {
     std::ostringstream os;
     switch(suit) {
-        case Suit::Karo : os << "Karo "; break; 
-        case Suit::Herz : os << "Herz"; break;
-        case Suit::Pik : os << "Pik"; break;
-        case Suit::Kreuz : os << "Kreuz"; break;    
+        case Suit::KARO : os << "KARO "; break; 
+        case Suit::HERZ : os << "HERZ"; break;
+        case Suit::PIK : os << "PIK"; break;
+        case Suit::KREUZ : os << "KREUZ"; break;    
     }
     switch(face) {
         case Face::SIEBEN : os << "SIEBEN"; break;
@@ -36,19 +36,20 @@ Card Player::back()
 {
     return playerDeck[playerDeck.size()];
 }
-/*
-CardGame::CardGame()
-{
-    //players{Player(1), Player(2), Player(3), Player(4)};
-    
-    for (int i = 0; i < nrP; ++i)       // initialize 4 players
+
+//CardGame::CardGame()
+//{
+  //  players = {Player(1), Player(2), Player(3), Player(4)};
+   
+   /* for (int i = 0; i < nrP; ++i)       // initialize 4 players
         players[i] = Player(i+1);       // with ID 1, 2 ,3 ,4 respectively
     
     
     for (int i = 0; i < 4; ++i)         // initialize deck with 32 cards
         for(int j = 0; j < 8; ++j)      // each face once per suit  
             deck[i*8 + j] = Card((Suit)i, (Face)j);
-}*/
+*/
+//}
 
 bool const Card::operator<(Card &a)
 {
