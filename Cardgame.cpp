@@ -75,7 +75,7 @@ void Player::pop_back()
 }
 Card Player::back()
 {
-    return playerDeck[playerDeck.size()];
+    return playerDeck.back();
 }
 
 void Player::sort()
@@ -98,16 +98,28 @@ std::string Player::toString()
     return os.str();
 }
 
+int Player::size()
+{
+    return playerDeck.size();
+}
+
 
 CardGame::CardGame()
 {
 
-    for(int i = 0; i < nrP; ++i)
+    for(int i = 0; i < nrP; ++i){
         players.push_back(Player(i+1));
+        std::cout << "created Player " << players[i].getId() << " with " << players[i].getSumOfPoints()
+                << " Points and " << players[i].size() << " Cards\n";
     
-    for (int i = 0; i < 4; ++i)         // initialize deck with 32 cards
-        for(int j = 0; j < 8; ++j)      // each face once per suit  
-            deck.push_back(Card((Suit)i, (Face)j));
+    }
+    for (int i = 1; i < 5; ++i)         // initialize deck with 32 cards
+        for(int j = 0; j < 8; ++j){      // each face once per suit  
+            deck.push_back(Card((Suit)(i-1), (Face)j));
+           // std::cout << "created " << i*8 + (j-7) << ". Card: " << deck.back().toString() <<"\n";
+        }
+    //std::cout << "\nneue Runde\n\n";
+    for(int i = 0; i < deck.size(); ++i) std::cout << "created Card: " << deck[i].toString() << "\n";
 } 
 
 bool const Card::operator<(Card &a)
@@ -126,8 +138,9 @@ void CardGame::deal()
 {
     for (int i = 0; i < 8; ++i)
         for (int j = 0; j < 4; ++j){
-            players[j].push_back(deck[deck.size() - 1]);
+            players[j].push_back(deck.back());
             deck.pop_back();
+            std::cout << "inside CardGame::deal() created Card for Player " << j+1 << " " << players[j].back().toString() << "\n";
             
     }
     //for (int i = 0; i < 4; ++i)
@@ -159,8 +172,7 @@ void CardGame::play(bool mode)
 std::string CardGame::showPlayers()
 {
     std::ostringstream os;
-    for (int i = 0; i < deckSize / nrP; ++i)
-        for (int j = 0; j < nrP; ++j) {
+    for (int i = 0; i < nrP; ++i) {
         os << players[i].toString();    
         }
     return os.str();
