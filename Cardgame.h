@@ -9,7 +9,7 @@
 
 enum class Suit{KARO, HERZ, PIK, KREUZ};
 enum class Face{SIEBEN, ACHT, NEUN, ZEHN, BUBE, DAME, KOENIG, ASS};
-
+const int zeroId = -1; 
 
 class Card{
     Suit suit;

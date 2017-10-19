@@ -1,20 +1,20 @@
 #include "Cardgame.h"
 
-
+void f() 
+{
+    CardGame game;
+    game.shuffle();
+    game.deal();
+    std::cout << game.showPlayers();
+    game.play(false);
+    std::cout << game.showResult();
+}
 
 int main() {
     
-    
-    CardGame game;
-    game.deal();
-    std::cout << game.showPlayers();
-    
-    CardGame game2;
-    //game2.shuffle();
-    game2.deal();
-    std::cout << game2.showPlayers();
-    //game.play(false);
-    
+    f();
+
+
     
     /*
     Player p(1);

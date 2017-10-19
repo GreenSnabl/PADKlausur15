@@ -149,19 +149,23 @@ void CardGame::deal()
 
 void CardGame::play(bool mode)
 {
-    int winnerId;
+    int winnerId = zeroId;
+    int highest = 0;
     int pointSum = 0;
     int round = 0;
     while(round < deckSize/nrP)
     {
-        for(int i = 0; i < players.size(); ++i){
+        for(int i = 0; i < nrP; ++i){
             pointSum += players[i].back().getPoints();
-            winnerId = getWinnerId();
+            if(highest < players[i].back().getPoints()){highest = players[i].back().getPoints(); winnerId = players[i].getId();}
         }
-        for(int i = 0; i < players.size(); ++i)
+        for(int i = 0; i < nrP; ++i)
             players[i].pop_back();
         players[winnerId].addPoints(pointSum);
-        ++round;}
+        highest = 0;
+        winnerId = zeroId;
+        ++round;
+    }
     if(mode)
     {
         for (int i = 0; i < players.size(); ++i)
@@ -193,12 +197,11 @@ std::string CardGame::showResult()
 
 int CardGame::getWinnerId()
 {
-    int highest = 0;
     int winnerId;
-    for (int i = 0; i < nrP; ++i){
-    if(highest < players[i].back().getPoints())
-            { highest = players[i].back().getPoints(); winnerId = i;}
-    }
+    int highest = 0;
+    for (int i = 0; i < nrP; ++i)
+        if(highest < players[i].getSumOfPoints()) { highest = players[i].getSumOfPoints(); winnerId = players[i].getId();}
+    
     return winnerId;
 }
 
