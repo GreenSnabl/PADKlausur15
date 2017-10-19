@@ -19,8 +19,6 @@ public:
     Card(Suit su, Face fa) : suit{su}, face{fa}, points{(int)face} {}
     std::string toString();
     bool const operator<(Card&);
-    
-
 };
 
 
@@ -41,9 +39,7 @@ public:
     std::string toString();
     
     void setId(int);
-    int getId();     
-    
-
+    int getId();
 };
 
 class CardGame{
@@ -59,10 +55,8 @@ public:
     std::string showResult();
     
 private:
-    std::array<Player,nrP> players;
-    std::array<Card, deckSize> deck;
-
-
+    std::vector<Player> players;
+    std::vector<Card> deck;
 };
 
 

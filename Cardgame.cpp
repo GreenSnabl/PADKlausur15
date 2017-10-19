@@ -21,7 +21,6 @@ std::string Card::toString()
     }
     return os.str();
 }
-
 Player::Player(int i) : id{i}, sumOfPoints{0} {}
 
 void Player::push_back(Card c)
@@ -37,23 +36,24 @@ Card Player::back()
     return playerDeck[playerDeck.size()];
 }
 
-//CardGame::CardGame()
-//{
-  //  players = {Player(1), Player(2), Player(3), Player(4)};
-   
-   /* for (int i = 0; i < nrP; ++i)       // initialize 4 players
-        players[i] = Player(i+1);       // with ID 1, 2 ,3 ,4 respectively
-    
+CardGame::CardGame()
+{
+    for(int i = 0; i < nrP; ++i)
+        players.push_back(Player(i+1)); 
     
     for (int i = 0; i < 4; ++i)         // initialize deck with 32 cards
         for(int j = 0; j < 8; ++j)      // each face once per suit  
-            deck[i*8 + j] = Card((Suit)i, (Face)j);
-*/
-//}
+            deck.push_back(Card((Suit)i, (Face)j));
+}
 
 bool const Card::operator<(Card &a)
 {
     if(suit == a.suit) return face < a.face;
     return suit < a.suit; 
-    
 }
+
+void CardGame::shuffle()
+{
+    std::random_shuffle(deck.begin(), deck.end()); // random_shuffle aus C++ 98
+}                                                  // kein <random> random_generator nötig
+                                                   // aber schlechtere Zufallsnummern
