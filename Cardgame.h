@@ -16,9 +16,10 @@ class Card{
     Face face;
     int points;
 public:
-    Card(Suit su, Face fa) : suit{su}, face{fa}, points{(int)face} {}
+    Card(Suit, Face);
     std::string toString();
     bool const operator<(Card&);
+    int getPoints();
 };
 
 
@@ -37,8 +38,9 @@ public:
     void clearSumOfPoints();
     void addPoints(int);
     std::string toString();
+    void sort();
     
-    void setId(int);
+    int getSumOfPoints();
     int getId();
 };
 
@@ -54,9 +56,11 @@ public:
     std::string showPlayers();
     std::string showResult();
     
+    int getWinnerId();
+    
 private:
-    std::vector<Player> players;
-    std::vector<Card> deck;
+   std::vector<Player> players;
+   std::vector<Card> deck;
 };
 
 
