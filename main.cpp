@@ -1,7 +1,11 @@
 #include "Cardgame.h"
+#include <ctime>
+
+
 
 void f() 
 {
+    std::srand(time(0));
     CardGame game;
     game.shuffle();
     game.deal();

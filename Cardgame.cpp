@@ -95,6 +95,9 @@ std::string Player::toString()
     for(int i = 0; i < playerDeck.size(); ++i)
         os << playerDeck[i].toString() << "\t";
     os << "\n";
+    for(int i = 0; i < playerDeck.size(); ++i)
+        os << playerDeck[i].getPoints() << " Points\t";
+    os << "\n";
     return os.str();
 }
 
@@ -109,8 +112,8 @@ CardGame::CardGame()
 
     for(int i = 0; i < nrP; ++i){
         players.push_back(Player(i+1));
-        std::cout << "created Player " << players[i].getId() << " with " << players[i].getSumOfPoints()
-                << " Points and " << players[i].size() << " Cards\n";
+       // std::cout << "created Player " << players[i].getId() << " with " << players[i].getSumOfPoints()
+       //         << " Points and " << players[i].size() << " Cards\n";
     
     }
     for (int i = 1; i < 5; ++i)         // initialize deck with 32 cards
@@ -119,7 +122,7 @@ CardGame::CardGame()
            // std::cout << "created " << i*8 + (j-7) << ". Card: " << deck.back().toString() <<"\n";
         }
     //std::cout << "\nneue Runde\n\n";
-    for(int i = 0; i < deck.size(); ++i) std::cout << "created Card: " << deck[i].toString() << "\n";
+    //for(int i = 0; i < deck.size(); ++i) std::cout << "created Card: " << deck[i].toString() << "\n";
 } 
 
 bool const Card::operator<(Card &a)
@@ -140,9 +143,11 @@ void CardGame::deal()
         for (int j = 0; j < 4; ++j){
             players[j].push_back(deck.back());
             deck.pop_back();
-            std::cout << "inside CardGame::deal() created Card for Player " << j+1 << " " << players[j].back().toString() << "\n";
-            
-    }
+            //std::cout << "inside CardGame::deal() created Card for Player " << j+1 << " " << players[j].back().toString() << "\n";
+    }    
+    
+    //for(int i = 0; i < nrP; ++i)
+    //std::cout << "Size of player " << players[i].getId() << "s deck is " << players[i].size() << "\n";
     //for (int i = 0; i < 4; ++i)
     //    players[i].sort();
 }
@@ -161,7 +166,8 @@ void CardGame::play(bool mode)
         }
         for(int i = 0; i < nrP; ++i)
             players[i].pop_back();
-        players[winnerId].addPoints(pointSum);
+        players[winnerId-1].addPoints(pointSum);
+        pointSum = 0;
         highest = 0;
         winnerId = zeroId;
         ++round;
@@ -189,7 +195,7 @@ std::string CardGame::showResult()
     os << "The winner is Player " << getWinnerId() << "\n";
     for(int i = 0; i < nrP; ++i)
     {
-        os << "Player " << players[i].getId() << ": " << players[i].getSumOfPoints() << "Points\n";    
+        os << "Player " << players[i].getId() << ": " << players[i].getSumOfPoints() << " Points\n";    
     }
     return os.str();
 }
