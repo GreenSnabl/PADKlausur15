@@ -5,17 +5,22 @@
 
 void f() 
 {
-    std::srand(time(0));
+    
     CardGame game;
     game.shuffle();
     game.deal();
     std::cout << game.showPlayers();
     game.play(false);
-    std::cout << game.showResult();
+    //std::cout << game.showResult();
+    game.deal();
+    game.play(true);
+    game.deal();
+    game.play(true);
+    //std::cout << game.showResult();
 }
 
 int main() {
-    
+    std::srand(time(0));
     f();
 
 

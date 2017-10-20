@@ -154,27 +154,42 @@ void CardGame::deal()
 
 void CardGame::play(bool mode)
 {
+    std::vector<Card> trash;
     int winnerId = zeroId;
     int highest = 0;
     int pointSum = 0;
-    int round = 0;
-    while(round < deckSize/nrP)
+    for(int round = 0; round < deckSize/nrP; ++round)
     {
         for(int i = 0; i < nrP; ++i){
             pointSum += players[i].back().getPoints();
             if(highest < players[i].back().getPoints()){highest = players[i].back().getPoints(); winnerId = players[i].getId();}
         }
-        for(int i = 0; i < nrP; ++i)
+        for(int i = 0; i < nrP; ++i) {
+            trash.push_back(players[i].back());
             players[i].pop_back();
+        }
         players[winnerId-1].addPoints(pointSum);
         pointSum = 0;
         highest = 0;
         winnerId = zeroId;
-        ++round;
+    
+        for(int i = 0; i < nrP; ++i) {
+            
+            std::cout << "Player " << players[i].getId() << "s points: " << players[i].getSumOfPoints() << "\n";
+        }
+    
+    
+    
+    
     }
+    for(int i = 0; i < trash.size(); ++i)
+    {
+        deck.push_back(trash[i]);
+    }
+    std::cout << showResult();
     if(mode)
     {
-        for (int i = 0; i < players.size(); ++i)
+        for (int i = 0; i < nrP; ++i)
             players[i].clearSumOfPoints();
     } 
 }
